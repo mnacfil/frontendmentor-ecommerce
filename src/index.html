@@ -5,40 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
   <title>Frontend Mentor | E-commerce product page</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-center">
+      <div class="nav-left">
+        <button class="menu-btn">
+          <img src="../images/icon-menu.svg" alt="menu logo">
+        </button>
+        <div class="nav-title">
+          <img src="../images/logo.svg" alt="company logo">
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="#">Collections</a>
+          </li>
+          <li>
+            <a href="#">Men</a>
+          </li>
+          <li>
+            <a href="#">Women</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="cart-btn">
+          <img src="../images/icon-cart.svg" alt="cart logo">
+        </button>
+        <span class="avatar">
+          <img src="../images/image-avatar.png" alt="avatar logo">
+        </span>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <section class="products-container">
+      <button class="previous-btn">
+        <img src="../images/icon-previous.svg" alt="previous icon">
+      </button>
+      <div class="spotlight">
+        <img src="../images/image-product-1.jpg" alt="main-img" class="main-img">
+      </div>
+      <div class="images">
+        <div class="active">
+          <img src="../images/image-product-1-thumbnail.jpg" alt="image-product-1" class="product-img">
+        </div>
+        <div>
+          <img src="../images/image-product-2-thumbnail.jpg" alt="image-product-2" class="product-img">
+        </div>
+        <div>
+          <img src="../images/image-product-3-thumbnail.jpg" alt="image-product-3" class="product-img">
+        </div>
+        <div>
+          <img src="../images/image-product-4-thumbnail.jpg" alt="image-product-4" class="product-img">
+        </div>
+      </div>
+      <button class="next-btn">
+        <img src="../images/icon-next.svg" alt="next icon">
+      </button>
+    </section>
+    <section class="products-info">
+      <h3 class="company-name">Sneaker Company</h3>
+      <h2 class="product-feature">
+          Fall Limited Edition
+          <br />
+          Sneakers
+      </h2>
+      <p class="product-detail">
+        These low-profile sneakers are your perfect casual wear companion. Featuring a
+        durable rubber outer sole, they’ll withstand everything the weather can offer.
+      </p>
+      <div class="amount-container">
+        <div class="amount-left">
+            <p class="product-price">$125.00</p>
+            <p class="product-discount">50%</p>
+        </div>
+        <div class="amount-right">
+          <p class="product-old-price">$250.00</p>
+        </div>
+      </div>
+      <div class="product-controllers">
+        <div>
+          <button class="minus-btn">
+            <img src="../images/icon-minus.svg" alt="minus icon">
+          </button>
+          <p class="amount">0</p>
+          <button class="add-btn">
+            <img src="../images/icon-plus.svg" alt="plus icon">
+          </button>
+        </div>
+        <button class="add-to-cart-btn">
+          Add to cart
+        </button>
+      </div>
+    </section>
+  </main>
 
-  Collections
-  Men
-  Women
-  About
-  Contact
 
-  Sneaker Company
 
-  Fall Limited Edition Sneakers
-
-  These low-profile sneakers are your perfect casual wear companion. Featuring a
-  durable rubber outer sole, they’ll withstand everything the weather can offer.
-
-  $125.00
-  50%
-  $250.00
-
-  0
-  Add to cart
-
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
 </body>
 </html>
