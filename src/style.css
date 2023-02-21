@@ -67,7 +67,7 @@ img {
 .nav-right {
     display: flex;
     align-items: center;
-    width: 60px;
+    width: 70px;
     justify-content: space-between;
 }
 
@@ -75,7 +75,20 @@ img {
     background: none;
     border: none;
     cursor: pointer;
+    position: relative;
 }
+.nav-right .cart-btn .cart-amount {
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 50%;
+    padding: 3px 6px;
+    background: var(--primary-color);
+    color: var(--white);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+}
+
 .nav-right .avatar img{
     width: 26px;
 }
@@ -188,6 +201,7 @@ img {
     cursor: pointer;
     display: grid;
     place-items: center;
+    padding: 5px;
 }
 
 .product-controllers .amount {
@@ -207,6 +221,7 @@ img {
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 /* .product-controllers .add-to-cart-btn::before {
