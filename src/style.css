@@ -254,6 +254,16 @@ nav {
     display: none;
 }
 
+.cart-content {
+    display: none;
+}
+
+.cart-empty {
+    place-items: center;
+    padding: 3rem 0;
+    display: none;
+}
+
 .cart-modal h3 {
     margin-bottom: 30px;
     color: var(--very-dark-blue);
@@ -304,4 +314,12 @@ nav {
 
 .show-cart-modal {
     display: block;
+}
+
+.show-cart-modal-content {
+    display: block;
+}
+
+.show-cart-empty {
+    display: grid;
 }

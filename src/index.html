@@ -52,25 +52,32 @@
   <aside class="cart-modal">
     <h3>Cart</h3>
     <hr>
-    <div class="product-checkout">
-      <div class="product-checkout-img">
-        <img src="../images/image-product-1-thumbnail.jpg" alt="product-checkout-img">
+    <div class="cart-content">
+      <div class="product-checkout">
+        <div class="product-checkout-img">
+          <img src="../images/image-product-1-thumbnail.jpg" alt="product-checkout-img">
+        </div>
+        <div class="product-checkout-info">
+          <p class="title">Fall Limited Edition Sneakers</p>
+          <p class="total">
+            <span class="cart-price"></span> x
+            <span class="items"></span> =
+            <span class="total-price"></span>
+          </p>
+        </div>
+        <button class="delete-btn">
+          <img src="../images/icon-delete.svg" alt="delete-icon">
+        </button>
       </div>
-      <div class="product-checkout-info">
-        <p class="title">Fall Limited Edition Sneakers</p>
-        <p class="total">
-          <span class="cart-price"></span> x
-          <span class="items"></span> =
-          <span class="total-price"></span>
-        </p>
-      </div>
-      <button class="delete-btn">
-        <img src="../images/icon-delete.svg" alt="delete-icon">
+      <button class="main-btn checkout-btn">
+        checkout
       </button>
     </div>
-    <button class="main-btn checkout-btn">
-      checkout
-    </button>
+    <div class="cart-empty">
+      <p>
+        Your cart is empty.
+      </p>
+    </div>
   </aside>
   <main>
     <section class="products-container">
