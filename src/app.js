@@ -5,6 +5,8 @@ const addBtn = document.querySelector('.add-btn');
 const minusBtn = document.querySelector('.minus-btn');
 const cartBtn = document.querySelector('.cart-btn');
 const deleteBtn = document.querySelector('.delete-btn');
+const closeBtn = document.querySelector('.close-btn');
+const menuBtn = document.querySelector('.menu-btn');
 const amount = document.querySelector('.amount');
 const cartAmount = document.querySelector('.cart-amount');
 const cartModalNode = document.querySelector('.cart-modal');
@@ -14,9 +16,9 @@ const cartTotalPrice = document.querySelector('.total-price');
 const productPrice = document.querySelector('.product-price');
 const emptyCart = document.querySelector('.cart-empty');
 const cartContent = document.querySelector('.cart-content');
-
+const sidebarNode = document.querySelector('.sidebar');
+const bodyCoverNode = document.querySelector('.body-cover');
 let currentIndex = 0;
-// cartModalNode.savedHtml = cartModalNode.innerHTML;
 
 const checkIndex = (index) => {
     const imagesLength = productImages.length;
@@ -69,6 +71,15 @@ const updateCart = () => {
 
 const showCartModal = () => {
     cartModalNode.classList.toggle('show-cart-modal');
+}
+
+const openSidebar = () => {
+    bodyCoverNode.classList.add('show-body-cover');
+    sidebarNode.classList.add('show-sidebar');
+}
+const closeSidebar = () => {
+    bodyCoverNode.classList.remove('show-body-cover');
+    sidebarNode.classList.remove('show-sidebar');
 }
 
 const removeCartProduct = () => {
@@ -125,6 +136,8 @@ addBtn.addEventListener('click', addAmount);
 minusBtn.addEventListener('click', minusAmount);
 cartBtn.addEventListener('click', showCartModal);
 deleteBtn.addEventListener('click', removeCartProduct);
+menuBtn.addEventListener('click', openSidebar);
+closeBtn.addEventListener('click', closeSidebar);
 
 updateCart();
 setupCart()
