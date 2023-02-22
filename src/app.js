@@ -3,8 +3,14 @@ const previousBtn = document.querySelector('.previous-btn');
 const nextBtn = document.querySelector('.next-btn');
 const addBtn = document.querySelector('.add-btn');
 const minusBtn = document.querySelector('.minus-btn');
+const cartBtn = document.querySelector('.cart-btn');
 const amount = document.querySelector('.amount');
 const cartAmount = document.querySelector('.cart-amount');
+const cartModalNode = document.querySelector('.cart-modal');
+const cartPrice = document.querySelector('.cart-price');
+const cartItems = document.querySelector('.items');
+const cartTotalPrice = document.querySelector('.total-price');
+const productPrice = document.querySelector('.product-price');
 let currentIndex = 0;
 
 const checkIndex = (index) => {
@@ -35,29 +41,45 @@ const displayImage = (type) => {
 const addAmount = () => {
     const currentAmount = Number(amount.textContent);
     amount.textContent = currentAmount + 1;
-    updateCartAmount();
-    setAmountToLocalStorage();
+    setCartToLocalStorage();
+    updateCart();
 }
 const minusAmount = () => {
     const currentAmount = Number(amount.textContent);
     if(currentAmount === 0) return;
     amount.textContent = currentAmount - 1;
-    updateCartAmount();
-    setAmountToLocalStorage();
+    setCartToLocalStorage();
+    updateCart();
 }
 
-const updateCartAmount = () => {
-    cartAmount.textContent = amount.textContent;
+const updateCart = () => {
+    const {value, items, price, totalPrice} = getCartFromLocalStorage();
+    amount.textContent = value || amount.textContent;
+    cartAmount.textContent = value || amount.textContent;
+    cartItems.textContent = items || cartAmount.textContent;
+    cartPrice.textContent = price || productPrice.textContent;
+    cartTotalPrice.textContent = totalPrice || `$${Number(cartPrice.textContent.slice(1)) * Number(cartItems.textContent)}`;
 }
 
-const setAmountToLocalStorage = () => {
-    localStorage.setItem('amount', amount.textContent);
+const showCartModal = () => {
+    cartModalNode.classList.toggle('show-cart-modal');
 }
 
-const getAmountFromLocalStorage = () => {
-    const saveAmount = localStorage.getItem('amount');
-    if(!saveAmount) return 0;
-    return saveAmount;
+const setCartToLocalStorage = () => {
+    const cart = {
+        value: amount.textContent,
+        items: amount.textContent,
+        price: cartPrice.textContent,
+        totalPrice: `$${Number(amount.textContent) * Number(cartPrice.textContent.slice(1))}`
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+const getCartFromLocalStorage = () => {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
+    if(!cart) return {};
+    return cart;
 }
 
 nextBtn.addEventListener('click', () => {
@@ -68,6 +90,8 @@ previousBtn.addEventListener('click', () => {
 });
 addBtn.addEventListener('click', addAmount);
 minusBtn.addEventListener('click', minusAmount);
+cartBtn.addEventListener('click', showCartModal);
 
-amount.textContent = getAmountFromLocalStorage();
-cartAmount.textContent = getAmountFromLocalStorage();
+// amount.textContent = getAmountFromLocalStorage();
+// cartAmount.textContent = getAmountFromLocalStorage();
+updateCart()
