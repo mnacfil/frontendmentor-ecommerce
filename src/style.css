@@ -56,7 +56,7 @@ img {
 }
 
 .center {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -144,7 +144,7 @@ nav {
         margin-left: 3rem;
     }
     .nav-links li{
-        margin-right: 1rem;
+        margin-right: 1.5rem;
         height: 100px;
         display: flex;
         align-items: center;
@@ -154,7 +154,6 @@ nav {
     }
     .nav-links li a{
         color: var(--dark-grayish-blue);
-        font-size: 18px;
     }
     .nav-links li a:hover {
         color: var(--very-dark-blue);
@@ -234,10 +233,10 @@ nav {
 }
 
 .products-info .amount-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     align-items: center;
-    margin-bottom: 20px;
+    grid-template-columns: 1fr auto;
+    margin-bottom: 30px;
 }
 
 .products-info .amount-left {
@@ -273,6 +272,7 @@ nav {
     padding: 10px 0;
     border-radius: 10px;
     margin-bottom: 10px;
+    height: 50.5px;
 }
 
 .product-controllers div button {
@@ -302,6 +302,62 @@ nav {
     justify-content: center;
     font-size: 1rem;
     cursor: pointer;
+}
+
+@media screen and (min-width: 1440px) {
+    main {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 1fr 1fr;
+    }
+    .images div {
+        display: block !important;
+    }
+    .images div img {
+        width: 85px;
+        height: 85px;
+        border-radius: 5px;
+    }
+    .images {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .spotlight {
+        display: block;
+        width: 400px;
+        margin-bottom: 1rem;
+    }
+    .spotlight img{
+        border-radius: 10px;
+    }
+    .previous-btn, .next-btn {
+        display: none;
+    }
+    .products-info {
+        max-width: 450px;
+    }
+    .products-info .company-name {
+        font-size: 1.5rem;
+    }
+    .products-info .product-feature{
+        font-size: 2.75rem;
+    }
+    .products-info .amount-container {
+        grid-template-columns: 1fr;
+    }
+    .products-info .amount-container .amount-left {
+        margin-bottom: 10px;
+    }
+    .product-controllers {
+        display: grid;
+        align-items: center;
+        column-gap: 1rem;
+        grid-template-columns: auto auto;
+    }
+    .product-controllers div, .product-controllers button {
+        margin: 0;
+    }
 }
 
 /* Aside cart modal */
