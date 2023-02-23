@@ -69,8 +69,14 @@ const updateCart = () => {
     setupCart();
 }
 
-const showCartModal = () => {
+const toggleCartModal = () => {
     cartModalNode.classList.toggle('show-cart-modal');
+}
+
+const closeCartModal = (e) => {
+    if(!e.target.parentElement.classList.contains('cart-btn')) {
+        cartModalNode.classList.remove('show-cart-modal');
+    }
 }
 
 const openSidebar = () => {
@@ -101,7 +107,6 @@ const setCartToLocalStorage = () => {
 
 const getCartFromLocalStorage = () => {
     const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart);
     if(!cart) return {};
     return cart;
 }
@@ -134,10 +139,10 @@ previousBtn.addEventListener('click', () => {
 });
 addBtn.addEventListener('click', addAmount);
 minusBtn.addEventListener('click', minusAmount);
-cartBtn.addEventListener('click', showCartModal);
+cartBtn.addEventListener('click', toggleCartModal);
 deleteBtn.addEventListener('click', removeCartProduct);
 menuBtn.addEventListener('click', openSidebar);
 closeBtn.addEventListener('click', closeSidebar);
-
+window.addEventListener('click', closeCartModal);
 updateCart();
 setupCart()
