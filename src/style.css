@@ -25,6 +25,7 @@
 body {
     font-family: var(--font-family);
     font-size: var(--main-font);
+    position: relative;
 }
 
 .body-cover {
@@ -52,6 +53,11 @@ a {
 img {
     width: 100%;
     object-fit: cover;
+}
+
+.center {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .nav-links {
@@ -82,9 +88,9 @@ nav {
 
 .nav-right {
     display: flex;
-    align-items: center;
-    width: 70px;
     justify-content: space-between;
+    align-items: center;
+    width: 90px;
 }
 
 .nav-right .cart-btn {
@@ -106,8 +112,62 @@ nav {
 }
 
 .nav-right .avatar img{
-    width: 26px;
+    width: 30px;
+    margin: 0;
 }
+.nav-right .avatar:hover {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--primary-color);
+}
+
+@media screen and (min-width: 1440px) {
+    nav {
+        border-bottom: 1px solid var(--grayish-blue);
+        height: 100px;
+        display: grid;
+
+    }
+    .nav-center {
+        padding: 0;
+    }
+    .nav-left {
+        align-items: center;
+    }
+    .nav-left .menu-btn {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        margin-left: 3rem;
+    }
+    .nav-links li{
+        margin-right: 1rem;
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
+    .nav-links li:hover {
+        border-bottom: 3px solid var(--primary-color);
+    }
+    .nav-links li a{
+        color: var(--dark-grayish-blue);
+        font-size: 18px;
+    }
+    .nav-links li a:hover {
+        color: var(--very-dark-blue);
+    }
+
+    main {
+        padding: 5rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-items: center;
+    }
+}
+
 /* main */
 
 .spotlight {
@@ -244,16 +304,11 @@ nav {
     cursor: pointer;
 }
 
-/* .product-controllers .add-to-cart-btn::before {
-    content: url(../images/icon-cart.svg);
-    margin-right: 10px;
-} */
-
 /* Aside cart modal */
 
 .cart-modal {
     width: 92%;
-    max-width: 400px;
+    max-width: 330px;
     margin: 0 auto;
     padding: 20px 25px;
     background: var(--light-grayish-blue);
@@ -265,6 +320,13 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     display: none;
+}
+
+@media screen and (min-width: 1440px) {
+    .cart-modal {
+        right: -300px;
+        transform: translateX(0);
+    }
 }
 
 .cart-content {
