@@ -1,3 +1,4 @@
+const mainImg = document.querySelector('.main-img');
 const productImages = [...document.querySelectorAll('.product-img')];
 const previousBtn = document.querySelector('.previous-btn');
 const nextBtn = document.querySelector('.next-btn');
@@ -19,6 +20,15 @@ const cartContent = document.querySelector('.cart-content');
 const sidebarNode = document.querySelector('.sidebar');
 const bodyCoverNode = document.querySelector('.body-cover');
 let currentIndex = 0;
+
+productImages.forEach(product => {
+    let imgSrc = product.src.replace('-thumbnail', '');
+    if(mainImg.src === imgSrc) {
+        product.parentElement.classList.add('active-img');
+    } else {
+        product.parentElement.classList.remove('active-img');
+    }
+})
 
 const checkIndex = (index) => {
     const imagesLength = productImages.length;
@@ -56,16 +66,24 @@ const minusAmount = () => {
     if(currentAmount === 0) return;
     amount.textContent = currentAmount - 1;
     setCartToLocalStorage();
+    // display empty state if cart has no item
+    if(Number(amount.textContent) === 0) {
+        cartAmount.textContent = 0;
+        displayEmptyCart();
+        removeCartfromLocalStorage();
+        return;
+    }
     updateCart();
 }
 
 const updateCart = () => {
     const {value, items, price, totalPrice} = getCartFromLocalStorage();
-    amount.textContent = value || amount.textContent;
-    cartAmount.textContent = value || amount.textContent;
-    cartItems.textContent = items || cartAmount.textContent;
-    cartPrice.textContent = price || productPrice.textContent;
-    cartTotalPrice.textContent = totalPrice || `$${Number(cartPrice.textContent.slice(1)) * Number(cartItems.textContent)}`;
+    console.log(value);
+    amount.textContent = value || 0;
+    cartAmount.textContent = value || 0;
+    cartItems.textContent = items;
+    cartPrice.textContent = price;
+    cartTotalPrice.textContent = totalPrice;
     setupCart();
 }
 
@@ -99,8 +117,8 @@ const setCartToLocalStorage = () => {
     const cart = {
         value: amount.textContent,
         items: amount.textContent,
-        price: cartPrice.textContent,
-        totalPrice: `$${Number(amount.textContent) * Number(cartPrice.textContent.slice(1))}`
+        price: productPrice.textContent,
+        totalPrice: `$${Number(amount.textContent) * Number(productPrice.textContent.slice(1))}`
     }
     localStorage.setItem('cart', JSON.stringify(cart));
 }
@@ -123,12 +141,20 @@ const isCartEmpty = () => {
 
 const setupCart = () => {
     if(isCartEmpty()) {
-        cartContent.classList.remove('show-cart-modal-content');
-        emptyCart.classList.add('show-cart-empty');
+        displayEmptyCart();
     } else {
-        emptyCart.classList.remove('show-cart-empty');
-        cartContent.classList.add('show-cart-modal-content');
+        displayCartContent();
     }
+}
+
+const displayEmptyCart = () => {
+    cartContent.classList.remove('show-cart-modal-content');
+    emptyCart.classList.add('show-cart-empty');
+}
+
+const displayCartContent = () => {
+    emptyCart.classList.remove('show-cart-empty');
+    cartContent.classList.add('show-cart-modal-content');
 }
 
 nextBtn.addEventListener('click', () => {
@@ -137,6 +163,7 @@ nextBtn.addEventListener('click', () => {
 previousBtn.addEventListener('click', () => {
     displayImage('previous');
 });
+
 addBtn.addEventListener('click', addAmount);
 minusBtn.addEventListener('click', minusAmount);
 cartBtn.addEventListener('click', toggleCartModal);

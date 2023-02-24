@@ -312,11 +312,21 @@ nav {
     }
     .images div {
         display: block !important;
+        height: 91px;
+        transition: all 0.3s linear;
     }
+        .images div:hover {
+            opacity: 0.7;
+        }
     .images div img {
         width: 85px;
         height: 85px;
         border-radius: 5px;
+    }
+    .active-img {
+        border: 3px solid var(--primary-color);
+        border-radius: 8px;
+        opacity: 0.7;
     }
     .images {
         display: flex;
