@@ -8,6 +8,9 @@ const cartBtn = document.querySelector('.cart-btn');
 const deleteBtn = document.querySelector('.delete-btn');
 const closeBtn = document.querySelector('.close-btn');
 const menuBtn = document.querySelector('.menu-btn');
+const lightBoxCloseBtn = document.querySelector('.lightbox-close-btn');
+const lightboxNextBtn = document.querySelector('.lightbox-next-btn');
+const lightboxPrevBtn = document.querySelector('.lightbox-prev-btn');
 const amount = document.querySelector('.amount');
 const cartAmount = document.querySelector('.cart-amount');
 const cartModalNode = document.querySelector('.cart-modal');
@@ -19,38 +22,56 @@ const emptyCart = document.querySelector('.cart-empty');
 const cartContent = document.querySelector('.cart-content');
 const sidebarNode = document.querySelector('.sidebar');
 const bodyCoverNode = document.querySelector('.body-cover');
+const lightBoxNode = document.querySelector('.lightbox');
+const lightBoxImages = [...document.querySelectorAll('.products-container.lightbox .spotlight')];
+const lightBoxThumbnailImages = [...document.querySelectorAll('.products-container.lightbox .images div')];
 let currentIndex = 0;
 
-productImages.forEach(product => {
-    let imgSrc = product.src.replace('-thumbnail', '');
-    if(mainImg.src === imgSrc) {
-        product.parentElement.classList.add('active-img');
-    } else {
-        product.parentElement.classList.remove('active-img');
-    }
-})
-
-const checkIndex = (index) => {
-    const imagesLength = productImages.length;
+const checkIndex = (index) => {;
+    const imagesLength = lightBoxImages.length;
     if(index > imagesLength - 1) return 0;
     if(index < 0) return imagesLength - 1;
     return index;
 }
 
-const displayImage = (type) => {
+const displayImage = (type, index, view) => {
+
     if(type === 'next') {
         currentIndex++;
     }
     if(type === 'previous') {
         currentIndex--;
     }
+    if(type === 'navigate') {
+        currentIndex = index;
+    }
     currentIndex = checkIndex(currentIndex);
-    productImages.forEach((image, index) => {
-        const parent = image.parentElement;
+    // for mobile view
+    if(view === 'mobile') {
+        productImages.forEach((productImg, index) => {
+            const parent = productImg.parentElement;
+            if(!(currentIndex === index)) {
+                parent.classList.remove('active');
+            } else {
+                parent.classList.add('active');
+            }
+        });
+        return;
+    }
+    // set the active img on thumnail
+    lightBoxThumbnailImages.forEach((thumbnailImg, index) => {
         if(!(currentIndex === index)) {
-            parent.classList.remove('active');
+            thumbnailImg.classList.remove('active-img');
         } else {
-            parent.classList.add('active');
+            thumbnailImg.classList.add('active-img');
+        }
+    })
+    // set the main img correspond to active img
+    lightBoxImages.forEach((spotlightImg, index) => {
+        if(!(currentIndex === index)) {
+            spotlightImg.classList.remove('main-spotlight');
+        } else {
+            spotlightImg.classList.add('main-spotlight');
         }
     })
 }
@@ -78,7 +99,6 @@ const minusAmount = () => {
 
 const updateCart = () => {
     const {value, items, price, totalPrice} = getCartFromLocalStorage();
-    console.log(value);
     amount.textContent = value || 0;
     cartAmount.textContent = value || 0;
     cartItems.textContent = items;
@@ -157,10 +177,28 @@ const displayCartContent = () => {
     cartContent.classList.add('show-cart-modal-content');
 }
 
+const showLightbox = () => {
+    bodyCoverNode.classList.add('show-body-cover');
+    lightBoxNode.classList.add('show-lightbox');
+}
+
+const closelightbox = () => {
+    lightBoxNode.classList.remove('show-lightbox');
+    bodyCoverNode.classList.remove('show-body-cover');
+}
+
 nextBtn.addEventListener('click', () => {
-    displayImage('next');
+    console.log("hello");
+    displayImage('next', null, 'mobile');
 });
 previousBtn.addEventListener('click', () => {
+    displayImage('previous', null, 'mobile');
+});
+
+lightboxNextBtn.addEventListener('click', () => {
+    displayImage('next');
+});
+lightboxPrevBtn.addEventListener('click', () => {
     displayImage('previous');
 });
 
@@ -171,5 +209,24 @@ deleteBtn.addEventListener('click', removeCartProduct);
 menuBtn.addEventListener('click', openSidebar);
 closeBtn.addEventListener('click', closeSidebar);
 window.addEventListener('click', closeCartModal);
+mainImg.addEventListener('click', showLightbox);
+lightBoxCloseBtn.addEventListener('click', closelightbox);
+
+// once the app load dispay the active img correspond to main img
+productImages.forEach(product => {
+    let imgSrc = product.src.replace('-thumbnail', '');
+    if(mainImg.src === imgSrc) {
+        product.parentElement.classList.add('active-img');
+    } else {
+        product.parentElement.classList.remove('active-img');
+    }
+})
+
+lightBoxThumbnailImages.forEach((thumbnailImg, index) => {
+    thumbnailImg.addEventListener('click', () => {
+        displayImage('navigate', index);
+    })
+})
+
 updateCart();
 setupCart()
