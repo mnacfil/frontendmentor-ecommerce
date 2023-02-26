@@ -322,7 +322,7 @@ nav {
         border-radius: 5px;
         cursor: pointer;
     }
-    .active-img {
+    .active-img, .lightbox-active-img {
         border: 2px solid var(--primary-color);
         border-radius: 7px;
     }
