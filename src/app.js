@@ -213,15 +213,26 @@ mainImg.addEventListener('click', showLightbox);
 lightBoxCloseBtn.addEventListener('click', closelightbox);
 
 // once the app load dispay the active img correspond to main img
-productImages.forEach(product => {
-    let imgSrc = product.src.replace('-thumbnail', '');
+productImages.forEach((productImg, index) => {
+    let imgSrc = productImg.src.replace('-thumbnail', '');
     if(mainImg.src === imgSrc) {
-        product.parentElement.classList.add('active-img');
+        productImg.parentElement.classList.add('active-img');
     } else {
-        product.parentElement.classList.remove('active-img');
+        productImg.parentElement.classList.remove('active-img');
     }
+    productImg.addEventListener('click', () => {
+        mainImg.src = imgSrc;
+        productImages.forEach(sameProductImg => {
+            if(mainImg.src === sameProductImg.src.replace('-thumbnail', '')) {
+                sameProductImg.parentElement.classList.add('active-img');
+            } else{
+                sameProductImg.parentElement.classList.remove('active-img');
+            }
+        })
+    })
 })
 
+// when user click the image, it will navigate to that aside from clicking next/prev btn
 lightBoxThumbnailImages.forEach((thumbnailImg, index) => {
     thumbnailImg.addEventListener('click', () => {
         displayImage('navigate', index);
